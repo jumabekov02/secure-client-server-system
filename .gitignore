@@ -12,8 +12,9 @@ __pycache__/
 # IDE
 .vscode/
 
-# certificates / keys (будет позже)
+# certificates / keys 
 certs/
+keys/
 *.pem
 *.key
 *.crt
