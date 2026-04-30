@@ -68,27 +68,6 @@ If the payload is modified, verification fails immediately.
 
 ---
 
-## Project Structure
-
-```text
-secure-client-server-system/
-│
-├── main.py                  # FastAPI server
-├── client.py                # Login client
-├── client_submit.py         # Signed payload submission
-├── sign_payload.py          # Manual payload signing
-├── verify_signature.py      # Signature verification demo
-├── generate_keys.py         # Public/private key generation
-│
-├── keys/
-│   ├── client_private_key.pem
-│   └── client_public_key.pem
-│
-└── README.md
-```
-
----
-
 ## Technologies Used
 
 * Python
@@ -228,16 +207,6 @@ Possible production-level improvements:
 * Audit logging
 * Rate limiting
 * Anti-replay nonce protection
-
----
-
-## Author
-
-Murad Zhumabekov
-
-GitHub Repository:
-
-https://github.com/jumabekov02/secure-client-server-system
 
 ---
 
