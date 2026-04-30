@@ -1,0 +1,250 @@
+# Secure Client-Server System
+
+A secure client-server system built with FastAPI, JWT authentication, and ECDSA digital signatures to protect against unauthorized access, impersonation, and payload tampering.
+
+---
+
+## Project Goal
+
+This project demonstrates how theoretical concepts from System Security can be applied in a real implementation.
+
+The system protects against:
+
+* Unauthorized access
+* User impersonation
+* JWT misuse
+* Payload tampering
+* Fake requests
+
+It combines three major security layers:
+
+* Authentication
+* Authorization
+* Integrity verification
+
+---
+
+## Security Features
+
+### Authentication
+
+Users authenticate using username and password:
+
+```python
+client_id = "m"
+password = "123"
+```
+
+This represents:
+
+**Something You Know** (password-based authentication)
+
+---
+
+### Authorization
+
+After successful login, the server generates a JWT token.
+
+The token includes:
+
+* subject (`sub`)
+* issued time (`iat`)
+* expiration time (`exp`)
+
+Only users with valid JWT tokens can access protected endpoints.
+
+---
+
+### Integrity Protection
+
+The client signs the payload using:
+
+* ECDSA (Elliptic Curve Digital Signature Algorithm)
+* SHA-256 hashing
+
+The server verifies the signature using the client’s public key.
+
+If the payload is modified, verification fails immediately.
+
+---
+
+## Project Structure
+
+```text
+secure-client-server-system/
+│
+├── main.py                  # FastAPI server
+├── client.py                # Login client
+├── client_submit.py         # Signed payload submission
+├── sign_payload.py          # Manual payload signing
+├── verify_signature.py      # Signature verification demo
+├── generate_keys.py         # Public/private key generation
+│
+├── keys/
+│   ├── client_private_key.pem
+│   └── client_public_key.pem
+│
+└── README.md
+```
+
+---
+
+## Technologies Used
+
+* Python
+* FastAPI
+* Uvicorn
+* PyJWT
+* Cryptography
+* ECDSA
+* SHA-256
+* HTTP Bearer Authentication
+
+---
+
+## How It Works
+
+### Step 1 — Login
+
+The client sends credentials to:
+
+```text
+POST /login
+```
+
+Example:
+
+```json
+{
+  "client_id": "m",
+  "password": "123"
+}
+```
+
+If valid:
+
+→ Server returns JWT token
+
+---
+
+### Step 2 — Payload Signing
+
+The client prepares payload:
+
+```json
+{
+  "exam": "system_security",
+  "score": 28
+}
+```
+
+Then signs it using the private key.
+
+---
+
+### Step 3 — Secure Submission
+
+The client sends:
+
+* JWT token
+* payload
+* digital signature
+
+to:
+
+```text
+POST /data/submit
+```
+
+---
+
+### Step 4 — Server Verification
+
+The server verifies:
+
+1. JWT token validity
+2. token ownership
+3. payload signature
+
+If all checks pass:
+
+```json
+{
+  "status": "accepted"
+}
+```
+
+---
+
+## Example Security Test
+
+Original payload:
+
+```json
+{
+  "score": 28
+}
+```
+
+Tampered payload:
+
+```json
+{
+  "score": 29
+}
+```
+
+Result:
+
+```text
+401 Invalid payload signature
+```
+
+This proves payload integrity.
+
+---
+
+## Security Principles Applied
+
+* Least Privilege
+* Complete Mediation
+* Reference Monitor
+* Defense in Depth
+* Public Key Cryptography
+* Digital Signatures
+
+---
+
+## Future Improvements
+
+Possible production-level improvements:
+
+* HTTPS / TLS
+* Password hashing (bcrypt)
+* Refresh tokens
+* X.509 certificates
+* Certificate Authority validation
+* Role-Based Access Control (RBAC)
+* Audit logging
+* Rate limiting
+* Anti-replay nonce protection
+
+---
+
+## Author
+
+Murad Zhumabekov
+
+GitHub Repository:
+
+https://github.com/jumabekov02/secure-client-server-system
+
+---
+
+## Final Note
+
+This project shows that security is not a single feature.
+
+It is a system of multiple coordinated protections working together:
+
+Authentication + Authorization + Cryptography + Integrity Verification
