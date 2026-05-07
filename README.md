@@ -16,6 +16,7 @@ The system protects against:
 * JWT misuse
 * Payload tampering
 * Fake requests
+* Replay attack 
 
 It combines three major security layers:
 
