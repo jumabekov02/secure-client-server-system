@@ -1,0 +1,41 @@
+{
+	"nodes":[
+		{"id":"2e43d673b2899861","type":"group","x":600,"y":-340,"width":314,"height":1200,"color":"5","label":"SERVER"},
+		{"id":"3555d3dda275b1c0","type":"group","x":-441,"y":-340,"width":287,"height":1200,"color":"4","label":"CLIENT"},
+		{"id":"bec1547c83868011","type":"text","text":"### CERTIFICATE\n(public key + identity + signed by CA)","x":-424,"y":367,"width":247,"height":105,"color":"3"},
+		{"id":"3c311aba985cc19d","type":"text","text":"### PRIVATE KEY\n(kept secret on client)","x":-409,"y":172,"width":217,"height":80,"color":"3"},
+		{"id":"3b3cc8eb499a430e","type":"text","text":"### CLIENT HAS:\n\n• client_id + password \n• Private Key \n• Certificate (signed by CA)","x":-417,"y":-55,"width":240,"height":155,"color":"3"},
+		{"id":"6acba3e1a94cd2e2","type":"text","text":"# CLIENT","x":-380,"y":-250,"width":145,"height":60,"color":"4"},
+		{"id":"db30de9f0e66f187","type":"text","text":"","x":540,"y":-300,"width":50,"height":50,"color":"5"},
+		{"id":"76cb02dbaf3700de","type":"text","text":"Validate credentials  \nGenerate JWT","x":398,"y":-220,"width":192,"height":50,"color":"5"},
+		{"id":"b13a258b07e4f594","type":"text","text":"","x":-140,"y":805,"width":50,"height":50,"color":"4"},
+		{"id":"45c2182462a99c2c","type":"text","text":"### WHAT THIS PROTECTS:\n\n• Authentication (JWT)  \n• Integrity (Digital Signature)  \n• Authenticity (Certificate + CA)  \n• Replay Attacks (Nonce)","x":-437,"y":1000,"width":274,"height":179,"color":"1"},
+		{"id":"8591d4657221dda9","type":"text","text":"# SECURE CLIENT-SERVER COMMUNICATION FLOW","x":-93,"y":-480,"width":637,"height":60,"color":"#08418c"},
+		{"id":"4078cbb30b541734","type":"text","text":"### SERVER HAS:\n\n• JWT Secret Key\n• Trusted CA Certificate","x":620,"y":-65,"width":252,"height":125,"color":"6"},
+		{"id":"5c827f3e755d9a0a","type":"text","text":"","x":-140,"y":-300,"width":50,"height":50,"color":"4"},
+		{"id":"a192c2568cc3bbcc","type":"text","text":"client_id, password","x":127,"y":-350,"width":196,"height":50,"color":"4"},
+		{"id":"08351d614ebf0c9d","type":"text","text":"","x":540,"y":-140,"width":50,"height":50,"color":"5"},
+		{"id":"e75257374243999f","type":"text","text":"","x":-140,"y":-140,"width":50,"height":50,"color":"4"},
+		{"id":"6187df7464b78588","type":"text","text":"","x":-140,"y":-27,"width":50,"height":50,"color":"4"},
+		{"id":"4b109df053017054","type":"text","text":"","x":540,"y":-27,"width":50,"height":50,"color":"5"},
+		{"id":"6a29f037b616177a","type":"text","text":"JWT access token","x":140,"y":-195,"width":183,"height":55,"color":"5"},
+		{"id":"4f6c6f969992aaca","type":"text","text":"- (Authorization: Bearer JWT)\n- Payload = { data, nonce, client_id, … }\n- Signature = Sign(Hash(Payload), Private Key)\n- Certificate (client certificate in base64)","x":-140,"y":35,"width":280,"height":229,"color":"4"},
+		{"id":"3512678b3c3484b5","type":"text","text":"### REPLAY PROTECTION\nStore used nonces to prevent replay attack","x":622,"y":368,"width":272,"height":104,"color":"6"},
+		{"id":"15bd016ca0d8d6e5","type":"text","text":"### TRUSTED CA\nUsed to verify client certificate","x":622,"y":160,"width":252,"height":104,"color":"6"},
+		{"id":"fdd4d3557d794f4e","type":"text","text":"# SERVER","x":633,"y":-250,"width":250,"height":60,"color":"5"},
+		{"id":"1968c907583db9fc","type":"text","text":"### 4. VERIFY JWT  \n• Check token signature  \n• Check expiration  \n• Extract client_id\n\n### 5. VALIDATE CLIENT CERTIFICATE  \n• Decode certificate  \n• Verify signature using Trusted CA  \n• Extract client public key\n\n### 6. VERIFY SIGNATURE  \n• Recreate hash of received payload  \n• Verify signature using  \nclient public key\n\n### 7. CHECK NONCE (REPLAY PROTECTION)  \n• If nonce already used → Reject  \n• Else store nonce","x":280,"y":142,"width":310,"height":638,"color":"5"},
+		{"id":"b5699158b9c44366","type":"text","text":"","x":540,"y":805,"width":50,"height":50,"color":"5"},
+		{"id":"d3c55181ea07e6e3","type":"text","text":"Success / Error","x":140,"y":855,"width":168,"height":50,"color":"5"},
+		{"id":"217b5c3dce0042fb","type":"text","text":"### IF ANY STEP FAILS:\n\nServer rejects the request  \n(401 Unauthorized)  \nand does not process the data.","x":224,"y":1000,"width":296,"height":179,"color":"1"},
+		{"id":"a211df0d2adf8bd1","type":"text","text":"### IF EVERYTHING IS VALID:\n\nServer accepts the request  \nand processes the data.","x":-115,"y":1000,"width":274,"height":179,"color":"1"},
+		{"id":"c59aa94f9c0611d7","type":"text","text":"### KEY POINTS:\n\n• Private key never leaves the client  \n• Server never trusts the client blindly  \n• Certificates solve the public key trust problem  \n• Nonce prevents replay of valid requests","x":565,"y":1000,"width":349,"height":179,"color":"1"}
+	],
+	"edges":[
+		{"id":"259815267bb1626f","fromNode":"5c827f3e755d9a0a","fromSide":"right","toNode":"db30de9f0e66f187","toSide":"left","color":"4","label":"1. LOGIN REQUEST"},
+		{"id":"3aff8894039bb1aa","fromNode":"08351d614ebf0c9d","fromSide":"left","toNode":"e75257374243999f","toSide":"right","color":"5","label":"2. LOGIN RESPONSE"},
+		{"id":"3195573f13b4737e","fromNode":"6187df7464b78588","fromSide":"right","toNode":"4b109df053017054","toSide":"left","color":"4","label":"3.SUBMIT SECURE DATA REQUEST"},
+		{"id":"b5c133a4895c0367","fromNode":"4b109df053017054","fromSide":"bottom","toNode":"1968c907583db9fc","toSide":"top","color":"5"},
+		{"id":"c696e9ee48fd1274","fromNode":"b5699158b9c44366","fromSide":"left","toNode":"b13a258b07e4f594","toSide":"right","color":"5","label":"8. RESPONSE"},
+		{"id":"a9ee9e73e42b6915","fromNode":"4f6c6f969992aaca","fromSide":"right","toNode":"4b109df053017054","toSide":"left","color":"4"}
+	]
+}
