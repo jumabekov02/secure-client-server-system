@@ -69,6 +69,12 @@ If the payload is modified, verification fails immediately.
 
 ---
 
+## System Architecture
+
+![System Flow](diagrams/secure-flow.png)
+
+---
+
 ## Technologies Used
 
 * Python
