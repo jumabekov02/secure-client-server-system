@@ -3,7 +3,7 @@ import jwt
 from fastapi import HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-SECRET_KEY = "CHANGE_ME_LATER"
+SECRET_KEY = "a8F2kLm9QwEr7TyUiOp3ZxCvBnM5rStY8pL1hG6dJ"
 ALGORITHM = "HS256"
 TOKEN_TTL_SECONDS = 60 * 15
 
@@ -29,3 +29,4 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(auth_scheme
         raise HTTPException(status_code=401, detail="Token expired")
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid token")
+    

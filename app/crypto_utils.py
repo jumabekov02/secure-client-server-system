@@ -30,8 +30,12 @@ def load_and_verify_client_cert(cert_b64: str):
             padding.PKCS1v15(),
             client_cert.signature_hash_algorithm,
         )
+        print("Certificate is trusted")
     except InvalidSignature:
+        print("Invalid certificate!")
         raise HTTPException(status_code=401, detail="Invalid client certificate")
+    
+    print("Public key extracted from certificate")
 
     return client_cert.public_key()
 
@@ -46,12 +50,16 @@ def verify_payload_signature(public_key, payload: dict, signature_b64: str):
             padding.PKCS1v15(),
             hashes.SHA256(),
         )
+        print("Signature is valid")
     except InvalidSignature:
+        print("Invalid payload signature detected!")
         raise HTTPException(status_code=401, detail="Invalid payload signature")
 
 
 def check_nonce(nonce: str):
     if nonce in USED_NONCES:
+        print("Replay attack detected!")
         raise HTTPException(status_code=401, detail="Replay attack detected")
 
     USED_NONCES.add(nonce)
+    print("Nonce accepted")

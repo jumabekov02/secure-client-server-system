@@ -1,5 +1,6 @@
 # Secure Client-Server System
 
+HEAD
 A secure client-server system built with FastAPI, JWT authentication, and ECDSA digital signatures to protect against unauthorized access, impersonation, and payload tampering.
 
 ---
@@ -217,3 +218,88 @@ This project shows that security is not a single feature.
 It is a system of multiple coordinated protections working together:
 
 Authentication + Authorization + Cryptography + Integrity Verification
+=======
+A secure client-server architecture built with **FastAPI** implementing authentication, digital signatures, certificate validation, and replay attack protection.
+
+## Features
+
+- JWT authentication
+- RSA digital signatures
+- X.509 certificate validation
+- Certificate Authority trust model
+- Replay attack protection using nonce
+- Canonical JSON signing
+- Secure client-server communication
+
+## Architecture
+
+The system consists of:
+
+Server:
+- FastAPI backend
+- JWT authentication
+- Certificate validation via CA
+- Signature verification
+- Replay attack protection
+
+Client:
+- Signs payload using private key
+- Sends certificate and signature
+- Authenticates with JWT
+
+## Workflow
+
+1. Client authenticates using `/login`
+2. Server returns a JWT access token
+3. Client signs payload with its private key
+4. Client sends payload + signature + certificate
+5. Server verifies:
+
+   - JWT token  
+   - certificate validity via CA  
+   - extracts public key from certificate  
+   - verifies digital signature  
+   - checks nonce to prevent replay attacks
+
+## Security Properties
+
+- Authentication
+- Integrity
+- Non-repudiation
+- Replay attack protection
+- Certificate-based identity binding
+
+## Project Structure
+- app/
+    main.py
+    auth.py
+    crypto_utils.py
+    models.py
+
+- client/
+    client_submit.py
+
+- scripts/
+    generate_keys.py
+    sign_payload.py
+    verify_signature.py
+
+## Running the Server
+
+```bash
+python -m uvicorn app.main:app --port 8001
+
+
+## Running the Client
+
+python client/client_submit.py
+
+## Technologies
+
+- Python
+- FastAPI
+- JWT
+- Cryptography
+- RSA
+- X.509 certificates
+>>>>>>> 41761f2 (improve demo logs and project presentation flow)

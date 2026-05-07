@@ -1,13 +1,14 @@
 import base64
 import json
 from pathlib import Path
+import uuid
 
 import requests
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 
 
-BASE_URL = "http://127.0.0.1:8001"
+BASE_URL = "http://127.0.0.1:8000"
 
 PRIVATE_KEY_PATH = Path("certs/client/client.key")
 CERT_PATH = Path("certs/client/client.crt")
@@ -77,12 +78,14 @@ def main():
     payload = {
         "exam": "system_security",
         "score": 28,
-        "nonce": "abc123"
+        "nonce": str(uuid.uuid4()) #str(uuid.uuid4()) #"abc123" 
     }
 
     token = login(client_id, password)
 
     signature = sign_payload(payload)
+
+    #payload["score"] = 31
 
     certificate = load_certificate_b64()
 
