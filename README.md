@@ -287,7 +287,7 @@ Client:
 ## Running the Server
 
 ```bash
-python -m uvicorn app.main:app --port 8001
+python -m uvicorn app.main:app --reload
 
 
 ## Running the Client
@@ -302,4 +302,3 @@ python client/client_submit.py
 - Cryptography
 - RSA
 - X.509 certificates
->>>>>>> 41761f2 (improve demo logs and project presentation flow)
