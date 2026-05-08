@@ -1,6 +1,6 @@
 # Secure Client-Server System
 
-A secure client-server system built with FastAPI, JWT authentication, and ECDSA digital signatures to protect against unauthorized access, impersonation, and payload tampering.
+A secure client-server system built with FastAPI, JWT authentication, and RSA digital signatures to protect against unauthorized access, impersonation, and payload tampering.
 
 ---
 
