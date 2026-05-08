@@ -1,6 +1,5 @@
 # Secure Client-Server System
 
-HEAD
 A secure client-server system built with FastAPI, JWT authentication, and ECDSA digital signatures to protect against unauthorized access, impersonation, and payload tampering.
 
 ---
